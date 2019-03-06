@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using web_back_produktevaluering.web.Models;
 
 namespace web_back_produktevaluering.web
 {
@@ -8,6 +10,10 @@ namespace web_back_produktevaluering.web
     {
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var connection = "Data Source=Database/db.db";
+            services.AddDbContext<AppDbContext>();
+
             services.AddMvc();
             services.AddRouting();
         }
