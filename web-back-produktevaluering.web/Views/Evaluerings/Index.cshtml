@@ -1,31 +1,39 @@
 ﻿@model IEnumerable<web_back_produktevaluering.web.Models.Evaluering>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Evalueringer";
 }
 
-<h1>Index</h1>
+<h1>Evalueringer</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="alert alert-dark">
+            Her vises alle de oprettede evalueringer
+        </div>
+    </div>
+</div>
+
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Navn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Produkt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Karakter)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Navn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produkt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Karakter)
+        </th>
+        <th>
+            <a asp-action="Create" class="float-right btn btn-success">Opret ny</a>
+        </th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Navn)
@@ -37,11 +45,20 @@
                 @Html.DisplayFor(modelItem => item.Karakter)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.EvalueringId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EvalueringId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EvalueringId">Delete</a>
+                <div class="float-right">
+                    <a asp-action="Edit" asp-route-id="@item.EvalueringId">Rediger</a> |
+                    <a asp-action="Details" asp-route-id="@item.EvalueringId">Detaljer</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EvalueringId">Slet</a>
+                </div>
             </td>
         </tr>
-}
+    }
     </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="4">
+            <a asp-controller="Home" asp-action="Index">Tilbage til forside</a>
+        </td>
+    </tr>
+    </tfoot>
 </table>
