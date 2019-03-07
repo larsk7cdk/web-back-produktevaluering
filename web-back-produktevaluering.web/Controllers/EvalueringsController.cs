@@ -1,45 +1,36 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using web_back_produktevaluering.web.Models;
+using web_back_produktevaluering.web.Repositories;
 
 namespace web_back_produktevaluering.web.Controllers
 {
     public class EvalueringsController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IRepository<Evaluering> _evalueringRepository;
 
-        public EvalueringsController(AppDbContext context)
+        public EvalueringsController(IRepository<Evaluering> evalueringRepository)
         {
-            _context = context;
+            _evalueringRepository = evalueringRepository;
         }
 
-        // GET: Evaluerings
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Evalueringer.ToListAsync());
-        }
-
-        // GET: Evaluerings/Details/5
+        public async Task<IActionResult> Index() => View(await _evalueringRepository.ReadAll());
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
 
-            var evaluering = await _context.Evalueringer
-                .FirstOrDefaultAsync(m => m.EvalueringId == id);
+            var evaluering = await _evalueringRepository.ReadById((int)id);
             if (evaluering == null) return NotFound();
 
             return View(evaluering);
         }
 
-        // GET: Evaluerings/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Evaluerings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -49,8 +40,7 @@ namespace web_back_produktevaluering.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(evaluering);
-                await _context.SaveChangesAsync();
+                await _evalueringRepository.Create(evaluering);
                 return RedirectToAction(nameof(Index));
             }
 
@@ -62,12 +52,12 @@ namespace web_back_produktevaluering.web.Controllers
         {
             if (id == null) return NotFound();
 
-            var evaluering = await _context.Evalueringer.FindAsync(id);
+            var evaluering = await _evalueringRepository.ReadById((int)id);
             if (evaluering == null) return NotFound();
+
             return View(evaluering);
         }
 
-        // POST: Evaluerings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -79,51 +69,30 @@ namespace web_back_produktevaluering.web.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(evaluering);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EvalueringExists(evaluering.EvalueringId))
-                        return NotFound();
-                    throw;
-                }
-
+                await _evalueringRepository.Update(evaluering);
                 return RedirectToAction(nameof(Index));
             }
 
             return View(evaluering);
         }
 
-        // GET: Evaluerings/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
 
-            var evaluering = await _context.Evalueringer
-                .FirstOrDefaultAsync(m => m.EvalueringId == id);
+            var evaluering = await _evalueringRepository.ReadById((int)id);
             if (evaluering == null) return NotFound();
 
             return View(evaluering);
         }
 
-        // POST: Evaluerings/Delete/5
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var evaluering = await _context.Evalueringer.FindAsync(id);
-            _context.Evalueringer.Remove(evaluering);
-            await _context.SaveChangesAsync();
+            await _evalueringRepository.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EvalueringExists(int id)
-        {
-            return _context.Evalueringer.Any(e => e.EvalueringId == id);
         }
     }
 }

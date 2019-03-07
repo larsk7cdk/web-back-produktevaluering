@@ -6,7 +6,7 @@ namespace web_back_produktevaluering.web.Models
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=evaluering.db");
+            optionsBuilder.UseSqlite("Data Source=database/evaluering.db");
         }
 
         public DbSet<Evaluering> Evalueringer { get; set; }
