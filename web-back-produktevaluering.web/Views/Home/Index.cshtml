@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<web_back_produktevaluering.web.Models.Evaluering>
+
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,3 +15,38 @@
         </div>
     </div>
 </div>
+
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Navn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Produkt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Karakter)
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Navn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produkt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Karakter)
+            </td>              
+        </tr>
+    }
+    </tbody>
+</table>
+
+<a class="btn btn-link" asp-controller="Evaluerings" asp-action="Index">Evalueringer</a>
