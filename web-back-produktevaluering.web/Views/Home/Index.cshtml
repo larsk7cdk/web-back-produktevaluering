@@ -27,11 +27,12 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Karakter)
-
             </th>
             <th>
-                <a asp-controller="Evaluerings" asp-action="Index" class="float-right btn btn-success">Opret ny</a>
-
+                @Html.DisplayNameFor(model => model.Oprettet)
+            </th>
+            <th>
+                <a asp-controller="Evaluerings" asp-action="Create" class="float-right btn btn-success">Opret ny</a>
             </th>
         </tr>
     </thead>
@@ -45,8 +46,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Produkt)
                 </td>
-                <td colspan="2">
+                <td>
                     @Html.DisplayFor(modelItem => item.Karakter)
+                </td>
+                <td colspan="2">
+                    @Html.DisplayFor(modelItem => item.Oprettet)
                 </td>
             </tr>
         }

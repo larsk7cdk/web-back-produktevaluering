@@ -16,49 +16,55 @@
 
 <table class="table table-hover">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Navn)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Produkt)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Karakter)
-        </th>
-        <th>
-            <a asp-action="Create" class="float-right btn btn-success">Opret ny</a>
-        </th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Navn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produkt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Karakter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Oprettet)
+            </th>
+            <th>
+                <a asp-action="Create" class="float-right btn btn-success">Opret ny</a>
+            </th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Navn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produkt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Karakter)
-            </td>
-            <td>
-                <div class="float-right">
-                    <a asp-action="Edit" asp-route-id="@item.EvalueringId">Rediger</a> |
-                    <a asp-action="Details" asp-route-id="@item.EvalueringId">Detaljer</a> |
-                    <a asp-action="Delete" asp-route-id="@item.EvalueringId">Slet</a>
-                </div>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Navn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produkt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Karakter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Oprettet)
+                </td>
+                <td>
+                    <div class="float-right">
+                        <a asp-action="Edit" asp-route-id="@item.EvalueringId">Rediger</a> |
+                        <a asp-action="Details" asp-route-id="@item.EvalueringId">Detaljer</a> |
+                        <a asp-action="Delete" asp-route-id="@item.EvalueringId">Slet</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
     <tfoot>
-    <tr>
-        <td colspan="4">
-            <a asp-controller="Home" asp-action="Index">Tilbage til forside</a>
-        </td>
-    </tr>
+        <tr>
+            <td colspan="5">
+                <a asp-controller="Home" asp-action="Index">Tilbage til forside</a>
+            </td>
+        </tr>
     </tfoot>
 </table>

@@ -16,9 +16,9 @@ namespace web_back_produktevaluering.web.Repositories
             _context = context;
         }
 
-        public async Task<IList<Evaluering>> ReadAll() => await _context.Evalueringer.ToListAsync();
+        public async Task<IList<Evaluering>> ReadAll() => await _context.Evalueringer.OrderByDescending(x => x.Oprettet).ToListAsync();
 
-        public async Task<Evaluering> ReadById(int id) => await _context.Evalueringer.FirstOrDefaultAsync(m => m.EvalueringId == id);
+        public async Task<Evaluering> ReadById(int id) => await _context.Evalueringer.OrderByDescending(x => x.Oprettet).FirstOrDefaultAsync(m => m.EvalueringId == id);
 
         public async Task Create(Evaluering model)
         {

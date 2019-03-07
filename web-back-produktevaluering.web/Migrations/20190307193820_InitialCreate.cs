@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace web_back_produktevaluering.web.Migrations
 {
@@ -14,7 +15,8 @@ namespace web_back_produktevaluering.web.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Navn = table.Column<string>(nullable: false),
                     Produkt = table.Column<string>(nullable: false),
-                    Karakter = table.Column<int>(nullable: false)
+                    Karakter = table.Column<int>(nullable: false),
+                    Oprettet = table.Column<DateTime>(nullable: false, defaultValueSql: "CURRENT_TIMESTAMP")
                 },
                 constraints: table =>
                 {

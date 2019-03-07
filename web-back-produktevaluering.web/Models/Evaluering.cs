@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace web_back_produktevaluering.web.Models
 {
@@ -15,5 +16,9 @@ namespace web_back_produktevaluering.web.Models
         [Required]
         [Range(1, 10)]
         public int Karakter { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        public DateTime Oprettet { get; set; }
     }
 }
