@@ -21,7 +21,8 @@ namespace web_back_produktevaluering.web.Migrations
                     b.Property<int>("EvalueringId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Karakter");
+                    b.Property<int?>("Karakter")
+                        .IsRequired();
 
                     b.Property<string>("Navn")
                         .IsRequired();

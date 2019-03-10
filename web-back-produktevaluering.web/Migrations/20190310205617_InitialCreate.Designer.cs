@@ -9,7 +9,7 @@ using web_back_produktevaluering.web.Models;
 namespace web_back_produktevaluering.web.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190307193820_InitialCreate")]
+    [Migration("20190310205617_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,8 @@ namespace web_back_produktevaluering.web.Migrations
                     b.Property<int>("EvalueringId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Karakter");
+                    b.Property<int?>("Karakter")
+                        .IsRequired();
 
                     b.Property<string>("Navn")
                         .IsRequired();

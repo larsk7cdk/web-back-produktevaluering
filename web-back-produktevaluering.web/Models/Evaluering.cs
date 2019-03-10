@@ -7,15 +7,15 @@ namespace web_back_produktevaluering.web.Models
     {
         public int EvalueringId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Navn skal være udfyldt!")]
         public string Navn { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Produkt skal være udfyldt!")]
         public string Produkt { get; set; }
 
-        [Required]
-        [Range(1, 10)]
-        public int Karakter { get; set; }
+        [Required(ErrorMessage = "Karakter skal være udfyldt!")]
+        [Range(1, 10, ErrorMessage = "Karakteren skal være mellem 1 og 10!")]
+        public int? Karakter { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
